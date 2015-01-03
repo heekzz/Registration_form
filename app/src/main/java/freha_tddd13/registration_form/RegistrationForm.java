@@ -2,6 +2,7 @@ package freha_tddd13.registration_form;
 
 import android.content.Context;
 import android.text.InputType;
+import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -43,7 +44,7 @@ public class RegistrationForm extends LinearLayout {
     private void init() {
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
-        data = new HashMap<>();
+        data = new ArrayMap<>();
         compulsoryMap = new HashMap<>();
         editTextList = new ArrayList<>();
 
@@ -56,8 +57,8 @@ public class RegistrationForm extends LinearLayout {
         button.setText("Submit");
         button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        // When we click on the submitbutton we want to save the data in our forms
-        // to a datastructure
+        // When we click on the submit button we want to save the data in our forms
+        // to a data structure
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,42 +72,42 @@ public class RegistrationForm extends LinearLayout {
 
     public void addTextField(String fieldName, boolean isCompulsory) {
         TableRow tableRow = new TableRow(context);
-        TextView text = new TextView(context);
-        EditText textField = new EditText(context);
+        TextView textView = new TextView(context);
+        TextField textField = new TextField(context);
 
         // If the question is compulsory we mark the question with an asterix
         if(isCompulsory)
-            text.setText(fieldName + "*");
+            textView.setText(fieldName + "*");
         else
-            text.setText(fieldName);
+            textView.setText(fieldName);
 
         textField.setInputType(InputType.TYPE_CLASS_TEXT);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
-        tableRow.addView(text, 0, params);
+        tableRow.addView(textView, 0, params);
         tableRow.addView(textField, 1, params);
-        editTextList.add(textField);
         tableLayout.addView(tableRow);
     }
 
     // Adds a textfield for passwords, shows "*" instead of text.
     public void addPasswordField(){
         TableRow tableRow = new TableRow(context);
-        TextView text = new TextView(context);
-        EditText textField = new EditText(context);
-        text.setText("Password");
-        textField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        TextView textView = new TextView(context);
+        EditText editText = new EditText(context);
+        textView.setText("Password");
+        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
-        tableRow.addView(text, 0, params);
-        tableRow.addView(textField, 1, params);
+        tableRow.addView(textView, 0, params);
+        tableRow.addView(editText, 1, params);
         tableLayout.addView(tableRow);
     }
 
     private void saveData() {
         for(int i = 0; i < editTextList.size(); i++)  {
+
         }
 
     }

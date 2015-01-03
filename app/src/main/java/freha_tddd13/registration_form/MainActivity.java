@@ -12,11 +12,19 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RegistrationForm form = (RegistrationForm) findViewById(R.id.RegForm);
-        form.addTextField("Name", false);
-        form.addTextField("Address", false);
-        form.addTextField("Phone", true);
-        form.addPasswordField();
+//        RegistrationForm form = (RegistrationForm) findViewById(R.id.RegForm);
+//        form.addTextField("Name", false);
+//        form.addTextField("Address", false);
+//        form.addTextField("Phone", true);
+//        form.addPasswordField();
+
+        RegForm form = (RegForm) findViewById(R.id.regForm);
+        form.addTextField("Name", false, FieldRow.TEXT_FIELD);
+        form.addTextField("Address", false, FieldRow.TEXT_FIELD);
+        form.addTextField("Phone", false, FieldRow.TEXT_FIELD);
+        form.addTextField("Password", true, FieldRow.PASSWORD_FIELD);
+
+
     }
 
 
