@@ -4,6 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,18 +19,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        RegistrationForm form = (RegistrationForm) findViewById(R.id.RegForm);
-//        form.addTextField("Name", false);
-//        form.addTextField("Address", false);
-//        form.addTextField("Phone", true);
-//        form.addPasswordField();
 
         RegForm form = (RegForm) findViewById(R.id.regForm);
-        form.addTextField("Name", false, FieldRow.TEXT_FIELD);
-        form.addTextField("Address", false, FieldRow.TEXT_FIELD);
-        form.addTextField("Phone", false, FieldRow.TEXT_FIELD);
-        form.addTextField("Password", true, FieldRow.PASSWORD_FIELD);
-
+        form.addTextField("Name", false, RegForm.TEXT_FIELD);
+        form.addTextField("Address", false, RegForm.TEXT_FIELD);
+        form.addTextField("Phone", false, RegForm.TEXT_FIELD);
+        form.addTextField("Password", true, RegForm.PASSWORD_FIELD);
+        form.addTextField("E-mail", true, RegForm.EMAIL_FIELD);
 
     }
 
