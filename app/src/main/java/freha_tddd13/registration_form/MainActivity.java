@@ -15,17 +15,27 @@ import java.util.Set;
 
 public class MainActivity extends ActionBarActivity {
 
+    RegForm form;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RegForm form = (RegForm) findViewById(R.id.regForm);
+        form = (RegForm) findViewById(R.id.regForm);
         form.addTextField("Name", false, RegForm.TEXT_FIELD);
         form.addTextField("Address", false, RegForm.TEXT_FIELD);
         form.addTextField("Phone", false, RegForm.TEXT_FIELD);
         form.addTextField("Password", true, RegForm.PASSWORD_FIELD);
         form.addTextField("E-mail", true, RegForm.EMAIL_FIELD);
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                form.submit();
+            }
+        });
 
     }
 

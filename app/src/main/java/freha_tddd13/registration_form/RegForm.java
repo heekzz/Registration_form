@@ -74,20 +74,10 @@ public class RegForm extends LinearLayout {
         TextView info = new TextView(context);
         info.setLayoutParams(params);
         info.setText("Fields marked with a * is compulsory");
-        Button button = new Button(context);
-        button.setText("Submit");
-        button.setLayoutParams(params);
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submit();
-            }
-        });
 
         // Adds the components to RegForm which is an LinearLayout
         addView(tableLayout);
         addView(info);
-        addView(button);
     }
 
     /**
@@ -109,7 +99,7 @@ public class RegForm extends LinearLayout {
      *
      * This function should be called from a button's onClickListener
      */
-    private void submit() {
+    public void submit() {
         boolean emptyCompulsoryFields = false;
 
         // Loop through all our fields in the form to
