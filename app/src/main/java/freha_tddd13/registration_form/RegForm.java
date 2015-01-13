@@ -2,16 +2,10 @@ package freha_tddd13.registration_form;
 
 
 import android.content.Context;
-import android.text.Layout;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,7 +67,7 @@ public class RegForm extends LinearLayout {
 
         TextView info = new TextView(context);
         info.setLayoutParams(params);
-        info.setText("Fields marked with a * is compulsory");
+        info.setText("Fields marked with * are required");
 
         // Adds the components to RegForm which is an LinearLayout
         addView(tableLayout);
@@ -111,9 +105,9 @@ public class RegForm extends LinearLayout {
                 emptyCompulsoryFields = true;
 
                 // Also print a toast to notify the user the missing input
-                Toast promt = Toast.makeText(context,"The field \"" + tempRow.getName() + "\" is compulsory", Toast.LENGTH_SHORT);
-                promt.setGravity(Gravity.CENTER, 0, -100);
-                promt.show();
+                Toast prompt = Toast.makeText(context,"The field \"" + tempRow.getName() + "\" is required", Toast.LENGTH_SHORT/2);
+                prompt.setGravity(Gravity.CENTER, 0, -100);
+                prompt.show();
             } else {
                 tempRow.restoreTextColor(); // Reset the color to default if it was red before and the field is not empty
                 emptyCompulsoryFields = false;
@@ -128,6 +122,9 @@ public class RegForm extends LinearLayout {
                 String input = fields.get(k).getInput();
                 data.put(name, input);
             }
+            Toast prompt = Toast.makeText(context,"All done!",Toast.LENGTH_SHORT);
+            prompt.setGravity(Gravity.CENTER, 0, -100);
+            prompt.show();
         }
     }
 

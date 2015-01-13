@@ -6,11 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -23,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         form = (RegForm) findViewById(R.id.regForm);
-        form.addTextField("Name", false, RegForm.TEXT_FIELD);
+        form.addTextField("Name", true, RegForm.TEXT_FIELD);
         form.addTextField("Address", false, RegForm.TEXT_FIELD);
         form.addTextField("Phone", false, RegForm.TEXT_FIELD);
         form.addTextField("Password", true, RegForm.PASSWORD_FIELD);
