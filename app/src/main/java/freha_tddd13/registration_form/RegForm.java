@@ -85,17 +85,17 @@ public class RegForm extends LinearLayout {
     /**
      * Adds a new field to the form. Specify input type with the constants in the RegForm class
      * @param name String - Name of the form, shows next to the text field
-     * @param isCompulsory Boolean - True if a compulsory field. Cannot submit with this field empty
+     * @param isRequired Boolean - True if a required field. Cannot submit with this field empty
      * @param inputType Int - Input type of the field. Public integers in this class
      */
-    public void addTextField(String name, boolean isCompulsory, int inputType) {
-        FieldRow row = new FieldRow(context, name, isCompulsory, inputType);
+    public void addTextField(String name, boolean isRequired, int inputType) {
+        FieldRow row = new FieldRow(context, name, isRequired, inputType);
         fields.add(row);
         tableLayout.addView(row);
     }
     /**
-     * Saves the data in a HashMap, but only if there are no empty compulsory fields.
-     * If there are empty compulsory fields we notify the user by changing the text color
+     * Saves the data in a HashMap, but only if there are no empty required fields.
+     * If there are empty required fields we notify the user by changing the text color
      * of the fields where there are missing input.
      *
      * This function should be called from a button's onClickListener
@@ -105,7 +105,7 @@ public class RegForm extends LinearLayout {
         int requiredFieldsFilledIn = 0;
 
         // Loop through all our fields in the form to
-        // check if there are any empty compulsory fields
+        // check if there are any empty required fields
         for (int i = 0; i < fields.size(); i++) {
             FieldRow tempRow = fields.get(i);
             if (tempRow.isRequired() && tempRow.getInput().length() == 0) {
@@ -125,7 +125,7 @@ public class RegForm extends LinearLayout {
         // Boolean which is true only if all the required fields are filled in
         boolean submitAccepted = requiredFieldsFilledIn == countRequiredFields();
 
-        // If there are no empty compulsory fields we save the inputs from the fields
+        // If there are no empty required fields we save the inputs from the fields
         if (submitAccepted) {
             // Save data from the text fields into a HashMap
             for (int k = 0; k < fields.size(); k++) {
