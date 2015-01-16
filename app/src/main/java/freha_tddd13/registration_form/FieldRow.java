@@ -3,11 +3,7 @@ package freha_tddd13.registration_form;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,7 +17,7 @@ import android.widget.TextView;
 public class FieldRow extends TableRow {
 
     Context context;
-    private boolean isCompulsory;
+    private boolean isRequired;
     private String name;
     private EditText editText;
     private TextView textView;
@@ -32,13 +28,13 @@ public class FieldRow extends TableRow {
      *
      * @param context Context - of application
      * @param name String - name of the field. Printed in a TextView
-     * @param isCompulsory boolean - true if the field is compulsory
+     * @param isRequired boolean - true if the field is compulsory
      * @param fieldType int - type of input for the EditText
      */
-    public FieldRow(Context context, String name, final boolean isCompulsory, int fieldType) {
+    public FieldRow(Context context, String name, boolean isRequired, int fieldType) {
         super(context);
         this.context = context;
-        this.isCompulsory = isCompulsory;
+        this.isRequired = isRequired;
         this.name = name;
 
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -50,7 +46,7 @@ public class FieldRow extends TableRow {
         defaultColor = textView.getTextColors();
 
         // If the field is compulsory we add a star in the end of the name
-        if(isCompulsory) {
+        if(isRequired) {
             textView.setText(name + "*");
         }
         else {
@@ -85,8 +81,8 @@ public class FieldRow extends TableRow {
      * Returns a boolean that is true if the field is compulsory
      * @return boolean - true if the field is compulsory
      */
-    public boolean isCompulsory() {
-        return isCompulsory;
+    public boolean isRequired() {
+        return isRequired;
     }
 
     /**

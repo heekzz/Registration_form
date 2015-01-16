@@ -57,7 +57,6 @@ public class RegForm extends LinearLayout {
          * The FieldRow class extends a TableRow and are added to this TableLayout
          */
         tableLayout = new TableLayout(context);
-        tableLayout.setId(1);
         tableLayout.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
         tableLayout.setColumnStretchable(1, true);
@@ -76,6 +75,15 @@ public class RegForm extends LinearLayout {
 
     /**
      * Adds a new field to the form. Specify input type with the constants in the RegForm class
+     * @param row - FieldRow
+     */
+    public void addTextField(FieldRow row) {
+        fields.add(row);
+        tableLayout.addView(row);
+    }
+
+    /**
+     * Adds a new field to the form. Specify input type with the constants in the RegForm class
      * @param name String - Name of the form, shows next to the text field
      * @param isCompulsory Boolean - True if a compulsory field. Cannot submit with this field empty
      * @param inputType Int - Input type of the field. Public integers in this class
@@ -85,37 +93,40 @@ public class RegForm extends LinearLayout {
         fields.add(row);
         tableLayout.addView(row);
     }
-
     /**
      * Saves the data in a HashMap, but only if there are no empty compulsory fields.
      * If there are empty compulsory fields we notify the user by changing the text color
      * of the fields where there are missing input.
      *
      * This function should be called from a button's onClickListener
+     * @return Booelan, true if the submission was ok
      */
-    public void submit() {
-        boolean emptyCompulsoryFields = false;
+    public boolean submit() {
+        int requiredFieldsFilledIn = 0;
 
         // Loop through all our fields in the form to
         // check if there are any empty compulsory fields
         for (int i = 0; i < fields.size(); i++) {
             FieldRow tempRow = fields.get(i);
-            if (tempRow.isCompulsory() && tempRow.getInput().length() == 0) {
+            if (tempRow.isRequired() && tempRow.getInput().length() == 0) {
                 tempRow.setRedText();
-                emptyCompulsoryFields = true;
 
                 // Also print a toast to notify the user the missing input
                 Toast prompt = Toast.makeText(context,"The field \"" + tempRow.getName() + "\" is required", Toast.LENGTH_SHORT/2);
                 prompt.setGravity(Gravity.CENTER, 0, -100);
                 prompt.show();
-            } else {
+            }
+            if (tempRow.isRequired() && tempRow.getInput().length() > 0){
+                requiredFieldsFilledIn++;
                 tempRow.restoreTextColor(); // Reset the color to default if it was red before and the field is not empty
-                emptyCompulsoryFields = false;
             }
         }
 
+        // Boolean which is true only if all the required fields are filled in
+        boolean submitAccepted = requiredFieldsFilledIn == countRequiredFields();
+
         // If there are no empty compulsory fields we save the inputs from the fields
-        if (!emptyCompulsoryFields) {
+        if (submitAccepted) {
             // Save data from the text fields into a HashMap
             for (int k = 0; k < fields.size(); k++) {
                 String name = fields.get(k).getName();
@@ -126,6 +137,17 @@ public class RegForm extends LinearLayout {
             prompt.setGravity(Gravity.CENTER, 0, -100);
             prompt.show();
         }
+        return submitAccepted;
+    }
+
+    private int countRequiredFields() {
+        int size = 0;
+        for (int i = 0; i < fields.size(); i++) {
+            FieldRow tempRow = fields.get(i);
+            if (tempRow.isRequired())
+                size++;
+        }
+        return size;
     }
 
     /**

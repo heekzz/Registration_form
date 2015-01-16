@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity {
         form.addTextField("Phone", false, RegForm.TEXT_FIELD);
         form.addTextField("Password", true, RegForm.PASSWORD_FIELD);
         form.addTextField("E-mail", true, RegForm.EMAIL_FIELD);
+        form.addTextField(new FieldRow(this, "HEJ", true, RegForm.TEXT_FIELD));
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new Button.OnClickListener() {
